@@ -1,53 +1,46 @@
 <template>
-    <div class="row">
-        <div class="col-2">
-            <SignOut/>
-        </div>
-        <div class="col-9 d-flex align-items-center justify-content-end flex-row">
+    <div class="row mb-3">
+        <div class="col-12 d-flex align-items-center justify-content-center flex-row">
             <i class="fa-regular fa-star fa-lg me-1"></i>
             <span class="me-2">{{ score }}</span>
             <i class="fa-regular fa-heart fa-lg me-1"></i>
             <span>{{ lives }}</span>
         </div>
-     
-        
-    </div>
-    <div class="row mt-3">
-        <div class="col-12">
-            <TheImage/>
-        </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-12" v-if="!loader">
             <h4> {{ currentQuizData.showCategory }}</h4>
             <h4 class="mt-3 text-justify fw-bold category"> {{  currentQuestion.question }}</h4>
-            <div class="d-flex flex-column px-4">
-                <button v-for="option in currentOptions" class="btn btn-primary btn-lg btn-block mt-2 " @click="checkAnswer(option)"> {{ option }} </button> 
+            <div class="d-flex flex-column">
+                <button v-for="option in currentOptions" class="btn btn-primary btn-lg btn-block mt-2" @click="checkAnswer(option)"> {{ option }} </button> 
             </div>
             
+        </div>
+        <div class="col-12 mt-3" v-else>
+            <Loader/>
         </div>
     </div>
 </template>
 
 <script setup>
-import { useUserStore } from '../stores/user'
-import { useScoreStore } from '../stores/score';
+import { useUserStore } from '../stores/user';
 import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue';
 import { useRouter  } from 'vue-router';
-import TheImage from '../components/TheImage.vue';
-import SignOut from '../components/SignOut.vue';
 import { useToastify } from '../composables/Toastify'
+import Loader from '../components/Loader.vue';
+
 const { showMessage } = useToastify()
+
 
 //router
 const router = useRouter()
 //pinia Stores
 const userStore = useUserStore()
-const {  currentQuizData } = storeToRefs(userStore)
+const { existDoc, setResult } = userStore
+const {  currentQuizData,  score, fails, isLostDaGame } = storeToRefs(userStore)
 
-const useScore = useScoreStore()
-const { score, fails } = storeToRefs(useScore)
+
 
 onMounted( ()=> {
     getQuestions()
@@ -59,7 +52,7 @@ const ListOfQuestions = ref([])
 const currentQuestion = ref('')
 const currentOptions = ref([])
 const lives = ref(3)
-
+const loader = ref('')
 
 const checkInfo = () =>{
     if(currentQuizData.value.cat == 'Film & Tv'){
@@ -77,15 +70,18 @@ const checkInfo = () =>{
 
 const getQuestions = async () =>{
     checkInfo()
+    loader.value = true
     try{
         const res = await 
-        fetch(`https://the-trivia-api.com/api/questions?categories=${currentQuizData.value.cat}&limit=${currentQuizData.value.numberOfQuestions}&difficulty=${currentQuizData.value.level}`)
+        fetch(`https://the-trivia-api.com/api/questions?categories=${currentQuizData.value.cat}&limit=10&difficulty=${currentQuizData.value.level}`)
         const jsonResponse = await res.json()
         console.log(jsonResponse)
         ListOfQuestions.value = jsonResponse
         manageQuestions()
     }catch(error){
         console.log(error)
+    }finally{
+        loader.value = false
     }
 }
 
@@ -127,7 +123,7 @@ const checkAnswer = (answer) =>{
 }
 
 const checkGameState = () =>{
-    if(lives.value < 0 ){
+    if(lives.value == 0 ){
         showMessage('You lost!','lost')
         gameLost()
        
@@ -140,12 +136,18 @@ const checkGameState = () =>{
 }
 
 const gameLost = () =>{
-    router.push('/gamelost')
+    existDoc()
+    setResult('lost')
+    router.push('/gameFinish')
 }
 
 const gameWin = () =>{
-    router.push('/gamewon')
+    existDoc()
+    setResult('win')
+    router.push('/gameFinish')
 }
+
+
 </script>
 
 <style scoped>
@@ -158,5 +160,6 @@ const gameWin = () =>{
 
 .category{
     height: 100px;
+    font-size: 20px;
 }
 </style>

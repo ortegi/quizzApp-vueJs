@@ -1,28 +1,20 @@
 <template>  
 <div class="row">
-    <div class="col-2">
-        <SignOut/>
-    </div>
-</div>
-<div class="row mt-3">
     <div class="col-12">
         <form @submit.prevent="handleSubmit">
-            <TheImage/>
-            <p class="mt-3">Select a category!</p>
+            <p class="mt-1">Select a category!</p>
             <div class="theSelectDiv">
-                <select id="categories" class="mt-2" v-model="category" >
-                    <option v-for="cat in listOfCategories" >{{ cat }}</option>
+                <select id="categories" name="categories"  class="mt-2" v-model="category">
+                    <option v-for="cat in listOfCategories" :value="cat">{{ cat }}</option>
                 </select>
             </div>
             <p class="mt-3">Easy or Hard??</p>
            <div class="theSelectDiv"> 
                 <select id="dificulty" class="mt-2" v-model="levelOfDificulty">
-                    <option v-for="item in dificulty" >{{ item }}</option>
+                    <option v-for="item in dificulty"  :value="item">{{ item }}</option>
                 </select>
            </div> 
-            <p class="mt-3">How many questions?</p>
-            <input type="range" min="10" max="20" step="1" v-model="NofQ" class="mt-2"/>
-            <p> {{ NofQ }}</p>
+      
             <button class="btn btn-primary btn-lg mt-3" type="submit"> Start!</button>
         </form>
     </div>
@@ -36,8 +28,6 @@ import { useUserStore} from '../stores/user';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
-import SignOut from '../components/SignOut.vue';
-import TheImage from '../components/TheImage.vue';
 
 const router = useRouter();
 const userStore = useUserStore()
@@ -48,12 +38,12 @@ const listOfCategories = ['Arts & Literature', 'Film & Tv', 'Food & Drink', 'Gen
 
 const dificulty = ['easy', 'medium', 'hard']
 
-const NofQ = ref(10)
-const category = ref('')
-const levelOfDificulty = ref('')
+
+const category = ref('Food & Drink')
+const levelOfDificulty = ref('easy')
 
 const handleSubmit = () =>{
-    currentQuizData.value = {numberOfQuestions: NofQ.value, cat: category.value, level: levelOfDificulty.value, showCategory: category.value }
+    currentQuizData.value = {cat: category.value, level: levelOfDificulty.value, showCategory: category.value }
     router.push('/quizz')
 }
 
