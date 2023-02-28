@@ -16,11 +16,11 @@ const play = () =>{
 </script>
 
 <template>
-
+    <h2 class="mt-1">QUIZZ APP</h2>
     <div v-if="userData">
-        <h5 v-if="userData.displayName">Hi, {{ userData.displayName }}</h5>
-        <h5 v-else> Hi, {{  userData.email }}</h5>
-        <button class="btn btn-primary" @click="play"> Play!</button>
+        <h5 v-if="userData.displayName" class="mt-3">Hi, {{ userData.displayName }}</h5>
+        <h5 v-else class="mt-3"> Hi, {{  userData.email }}</h5>
+        <button class="btn btn-primary btn-lg btn-block mt-3" @click="play"> Play!</button>
     </div>
    <div v-if="!userData">
         <loader/>

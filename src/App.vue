@@ -33,7 +33,6 @@ const isLogedIn = async() =>{
     <div class="row">
       <div class="col-12">
         <img src="/descarga.jpeg" width="200" class="mb-4">
-        <h2 class="mt-1">QUIZZ APP</h2>
       </div>
     </div>
     

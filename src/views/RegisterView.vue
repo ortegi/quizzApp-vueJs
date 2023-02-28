@@ -26,7 +26,7 @@ const goToLogin = () =>{
 
 
 <template>
-
+    <h2 class="mt-1">QUIZZ APP</h2>
     <form @submit.prevent="handleSubmit">
         <input type="email" placeholder="email" class="mt-2" v-model.trim="email"> <br>
         <input type="password" placeholder="password"  class="mt-2" v-model.trim="password"> <br>

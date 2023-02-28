@@ -42,9 +42,29 @@ const dificulty = ['easy', 'medium', 'hard']
 const category = ref('Food & Drink')
 const levelOfDificulty = ref('easy')
 
+
+const emojis = {
+  'Arts & Literature': "fa-solid fa-palette",
+  'Film & Tv': "fa-solid fa-video",
+  'Food & Drink': "fa-solid fa-utensils",
+  'General knowledge': "fa-solid fa-graduation-cap",
+  'Geography': "fa-solid fa-earth-asia",
+  'History': "fa-solid fa-landmark",
+  'Music': "fa-solid fa-music",
+  'Science': "fa-solid fa-flask",
+  'Society & Culture': "fa-solid fa-people-group",
+  'Sport & Leisure': "fa-solid fa-person-snowboarding"
+}
+
+
+
+
+
 const handleSubmit = () =>{
-    currentQuizData.value = {cat: category.value, level: levelOfDificulty.value, showCategory: category.value }
+
+    currentQuizData.value = {cat: category.value, level: levelOfDificulty.value, showCategory: emojis[category.value] }
     router.push('/quizz')
+    console.log(currentQuizData.value)
 }
 
 </script>

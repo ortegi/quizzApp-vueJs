@@ -15,8 +15,8 @@
         <td>{{ doc.name }}</td>
         <td>{{ doc.points }}</td>
         </tr>
-        
     </tbody>
+    
 </table>
     <div v-if="loader">
         <loader/>
@@ -31,14 +31,22 @@ import TheResults from '../components/TheResults.vue'
 import Loader from '../components/Loader.vue';
 import { useUserStore  } from '../stores/user';
 import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
+onMounted(() => {
+    if(!documents){
+        loader.value = true;
+    }
+
+})
 
 const useScore = useUserStore()
 const { readDocs } = useScore
 const { score, fails,  isLostDaGame, documents, loader } = storeToRefs(useScore)
 
 
-    setTimeout(readDocs, 3000)
+
+setTimeout(readDocs, 3000)
 
 
 

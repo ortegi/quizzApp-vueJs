@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-12" v-if="!loader">
-            <h4> {{ currentQuizData.showCategory }}</h4>
+            <i :class="currentQuizData.showCategory"></i>
             <h4 class="mt-3 text-justify fw-bold category"> {{  currentQuestion.question }}</h4>
             <div class="d-flex flex-column">
                 <button v-for="option in currentOptions" class="btn btn-primary btn-lg btn-block mt-2" @click="checkAnswer(option)"> {{ option }} </button> 
@@ -54,22 +54,10 @@ const currentOptions = ref([])
 const lives = ref(3)
 const loader = ref('')
 
-const checkInfo = () =>{
-    if(currentQuizData.value.cat == 'Film & Tv'){
-        currentQuizData.value.cat = 'film_and_tv'
-    }else if(currentQuizData.value.cat == 'Arts & Literature'){
-        currentQuizData.value.cat = 'arts_and_literature'
-    }else if(currentQuizData.value.cat == 'Food & Drink'){
-        currentQuizData.value.cat = 'food_and_drink'
-    }else if(currentQuizData.value.cat == 'Society & Culture'){
-        currentQuizData.value.cat = 'society_and_culture'
-    }else if(currentQuizData.value.cat == 'sport & leisure'){
-        currentQuizData.value.cat = 'sport_and_leisure'
-    }
-}
+
 
 const getQuestions = async () =>{
-    checkInfo()
+
     loader.value = true
     try{
         const res = await 
@@ -153,13 +141,27 @@ const gameWin = () =>{
 <style scoped>
 
 
-
+.btn-primary{
+    font-size: 17px;
+    height: 60px;
+}
 .fa-star{
     color: #ffc300;
+}
+
+.fa-solid{
+    font-size: 25px;
+    color: #0d6efd;
 }
 
 .category{
     height: 100px;
     font-size: 20px;
 }
+
+h4.mt-3.text-justify.fw-bold.category {
+    width: 100%;
+    font-size: 18px;
+}
+
 </style>
