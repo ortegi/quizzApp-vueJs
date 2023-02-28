@@ -14,7 +14,6 @@
                     <option v-for="item in dificulty"  :value="item">{{ item }}</option>
                 </select>
            </div> 
-      
             <button class="btn btn-primary btn-lg mt-3" type="submit"> Start!</button>
         </form>
     </div>
@@ -37,11 +36,8 @@ const listOfCategories = ['Arts & Literature', 'Film & Tv', 'Food & Drink', 'Gen
 'Science', 'Society & Culture', 'Sport & Leisure']
 
 const dificulty = ['easy', 'medium', 'hard']
-
-
 const category = ref('Food & Drink')
 const levelOfDificulty = ref('easy')
-
 
 const emojis = {
   'Arts & Literature': "fa-solid fa-palette",
@@ -57,9 +53,6 @@ const emojis = {
 }
 
 
-
-
-
 const handleSubmit = () =>{
 
     currentQuizData.value = {cat: category.value, level: levelOfDificulty.value, showCategory: emojis[category.value] }
@@ -67,13 +60,11 @@ const handleSubmit = () =>{
     console.log(currentQuizData.value)
 }
 
+
 </script>
 
 <style scoped>
 
-    
-
-    
 .theSelectDiv select {
   background-color: #0D6efd;
   color: white;

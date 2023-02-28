@@ -16,7 +16,7 @@
         <td>{{ doc.points }}</td>
         </tr>
     </tbody>
-    
+
 </table>
     <div v-if="loader">
         <loader/>
@@ -44,11 +44,7 @@ const useScore = useUserStore()
 const { readDocs } = useScore
 const { score, fails,  isLostDaGame, documents, loader } = storeToRefs(useScore)
 
-
-
 setTimeout(readDocs, 3000)
-
-
 
 </script>
 

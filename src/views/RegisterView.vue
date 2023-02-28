@@ -11,7 +11,6 @@ const { registerUser, currentUser } = userStore
 const email = ref('')
 const password = ref('')
 
-
 const handleSubmit = () =>{
     registerUser(email.value, password.value)
     currentUser()
@@ -20,7 +19,6 @@ const handleSubmit = () =>{
 const goToLogin = () =>{
     router.push('/login')
 }
-
 
 </script>
 

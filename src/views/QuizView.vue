@@ -14,7 +14,6 @@
             <div class="d-flex flex-column">
                 <button v-for="option in currentOptions" class="btn btn-primary btn-lg btn-block mt-2" @click="checkAnswer(option)"> {{ option }} </button> 
             </div>
-            
         </div>
         <div class="col-12 mt-3" v-else>
             <Loader/>
@@ -40,8 +39,6 @@ const userStore = useUserStore()
 const { existDoc, setResult } = userStore
 const {  currentQuizData,  score, fails, isLostDaGame } = storeToRefs(userStore)
 
-
-
 onMounted( ()=> {
     getQuestions()
     score.value = 0;
@@ -55,9 +52,7 @@ const lives = ref(3)
 const loader = ref('')
 
 
-
 const getQuestions = async () =>{
-
     loader.value = true
     try{
         const res = await 
@@ -73,6 +68,7 @@ const getQuestions = async () =>{
     }
 }
 
+
 const manageQuestions = () =>{
     const randomNumber = Math.floor(Math.random() * ListOfQuestions.value.length);
     console.log(randomNumber);
@@ -81,6 +77,7 @@ const manageQuestions = () =>{
     ListOfQuestions.value.splice(randomNumber, 1)
     randomizeQuestions()
 }
+
 
 const randomizeQuestions = () =>{
     if(ListOfQuestions.value){
@@ -91,8 +88,8 @@ const randomizeQuestions = () =>{
         currentOptions.value.sort(() => Math.random() - 0.5)
         console.log(currentOptions.value)
     }
-  
 }
+
 
 const checkAnswer = (answer) =>{
     if(answer ===currentQuestion.value.correctAnswer ){
@@ -106,8 +103,6 @@ const checkAnswer = (answer) =>{
     currentQuestion.value = []
     currentOptions.value = []
     checkGameState()
-   
-    
 }
 
 const checkGameState = () =>{
@@ -117,17 +112,18 @@ const checkGameState = () =>{
        
     }else if(ListOfQuestions.value.length <= 0){
         gameWin()
-        
     }else{
         manageQuestions()
     }
 }
+
 
 const gameLost = () =>{
     existDoc()
     setResult('lost')
     router.push('/gameFinish')
 }
+
 
 const gameWin = () =>{
     existDoc()

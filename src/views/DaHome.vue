@@ -11,8 +11,6 @@ const play = () =>{
     router.push('/game')
 }
 
-
-
 </script>
 
 <template>
@@ -26,5 +24,4 @@ const play = () =>{
         <loader/>
    </div>
     
-     
 </template>
