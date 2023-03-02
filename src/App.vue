@@ -53,4 +53,10 @@ const isLogedIn = async() =>{
 img{
     border-radius: 50%;
 }
+
+@media only screen and (min-width: 800px) {
+  .container{
+    margin-top: 8vh;
+  }
+}
 </style>
