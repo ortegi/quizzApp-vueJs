@@ -1,7 +1,19 @@
-# Vue 3 + Vite
+# :video_game: Trivia App 
+This is a web application that allows users to play trivia games by selecting the category and level of difficulty. The app uses the The Trivia API to generate questions based on the user's selection. The app also shows the ranking of users and their scores.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## :pushpin: Technologies Used 
 
-## Recommended IDE Setup
+This project is built using the following technologies:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Vue.js 3
+- Pinia :pineapple:
+- Vue Router
+- Vite
+- Bootstrap
+- Font-Awesome Icons
+- Firebase
+- Firestore
+
+## Contributions are welcome! :alien: 
+
+Please open an issue or a pull request if you want to make any changes or improvements to the app.
